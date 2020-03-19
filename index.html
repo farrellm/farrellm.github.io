@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body onload="onload()">
     <nav class="navbar has-background-light" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="https://farrellm.github.io">
@@ -37,12 +37,43 @@
           </div>
         </div>
       </div>
-      <div class="container">
-        <iframe style="width:100%; height:25em" scrolling="no" src="./region.html?var=xxx" id="plotframe"> </iframe>
+      <br/>
+
+      <div class="refs tabs is-toggle is-toggle-rounded">
+        <ul>
+          <li id="log-tab" class="is-active" onclick="setLog()"><a>log</a></li>
+          <li id="linear-tab" class="" onclick="setLinear()"><a>linear</a></li>
+        </ul>
+      </div>
+
+      <div id="log-plots" class="container" style="display: block;">
+        <iframe id="region-log" style="width:100%; height:25em" scrolling="no"
+                src="./region-log.html?var=xxx"> </iframe>
         <div class="has-text-centered">
-          Days since 100 confirmed
+          Days since 100 confirmed cases
+        </div>
+        <hr/>
+        <iframe id="state-log" style="width:100%; height:25em" scrolling="no"
+                src="./state-log.html?var=xxx"> </iframe>
+        <div class="has-text-centered">
+          Days since 100 confirmed cases
         </div>
       </div>
+
+      <div id="linear-plots" class="container hidden" style="display: block;">
+        <iframe id="region-linear" style="width:100%; height:25em" scrolling="no"
+                src="./region-linear.html?var=xxx"> </iframe>
+        <div class="has-text-centered">
+          Days since 100 confirmed cases
+        </div>
+        <hr/>
+        <iframe id="state-linear" style="width:100%; height:25em" scrolling="no"
+                src="./state-linear.html?var=xxx"> </iframe>
+        <div class="has-text-centered">
+          Days since 100 confirmed cases
+        </div>
+      </div>
+
       <hr/>
       <div class="container refs">
         <h1 class="subtitle"> References </h1>
@@ -61,8 +92,40 @@
       </div>
     </section>
     <script>
-      var _plotframe = document.getElementById("plotframe");
-      _plotframe.contentWindow.location.href = _plotframe.src;
+      ["region-log", "region-linear", "state-log", "state-linear"].forEach(id => {
+          var _el = document.getElementById(id);
+          _el.contentWindow.location.href = _el.src;
+      });
+
+      function onload() {
+          var linp = document.getElementById("linear-plots")
+          linp.style.display = "none";
+      }
+
+      function setLog() {
+          document.getElementById("log-tab").classList.add("is-active");
+          document.getElementById("linear-tab").classList.remove("is-active");
+
+          var logp = document.getElementById("log-plots")
+          logp.style.display = "block";
+          logp.classList.remove("hidden");
+
+          var linp = document.getElementById("linear-plots")
+          linp.style.display = "none";
+          linp.classList.add("hidden");
+      }
+      function setLinear() {
+          document.getElementById("log-tab").classList.remove("is-active");
+          document.getElementById("linear-tab").classList.add("is-active");
+
+          var logp = document.getElementById("log-plots")
+          logp.style.display = "none";
+          logp.classList.add("hidden");
+
+          var linp = document.getElementById("linear-plots")
+          linp.style.display = "block";
+          linp.classList.remove("hidden");
+      }
     </script>
   </body>
 </html>
