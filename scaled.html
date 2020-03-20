@@ -22,9 +22,17 @@
         <div class="card">
           <div class="card-content">
             <p>
+              Normalized count of confirmed patients since the first
+              day with 100 confirmed patients.
+            </p>
+            <p>
               For each region, find the first day with at least 100
               confirmed in that region.  Count days from then on
               X-axis.
+            </p>
+            <p>
+              Patient count is scaled by the number confirmed on the
+              day 0, so day 0 has exactly 100 patients.
             </p>
           </div>
         </div>
@@ -40,13 +48,13 @@
 
       <div id="log-plots" class="container" style="display: block;">
         <iframe id="region-log" style="width:100%; height:25em" scrolling="no"
-                src="./region-log-raw.html?var=xxx"> </iframe>
+                src="./region-log.html?var=xxx"> </iframe>
         <div class="has-text-centered">
           Days since 100 confirmed cases
         </div>
         <hr/>
         <iframe id="state-log" style="width:100%; height:25em" scrolling="no"
-                src="./state-log-raw.html?var=xxx"> </iframe>
+                src="./state-log.html?var=xxx"> </iframe>
         <div class="has-text-centered">
           Days since 100 confirmed cases
         </div>
@@ -54,13 +62,13 @@
 
       <div id="linear-plots" class="container hidden" style="display: block;">
         <iframe id="region-linear" style="width:100%; height:25em" scrolling="no"
-                src="./region-linear-raw.html?var=xxx"> </iframe>
+                src="./region-linear.html?var=xxx"> </iframe>
         <div class="has-text-centered">
           Days since 100 confirmed cases
         </div>
         <hr/>
         <iframe id="state-linear" style="width:100%; height:25em" scrolling="no"
-                src="./state-linear-raw.html?var=xxx"> </iframe>
+                src="./state-linear.html?var=xxx"> </iframe>
         <div class="has-text-centered">
           Days since 100 confirmed cases
         </div>
@@ -90,7 +98,7 @@
       });
 
       function onload() {
-          setLinear();
+          setLog();
       }
 
       function setLog() {
