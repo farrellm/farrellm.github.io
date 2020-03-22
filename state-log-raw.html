@@ -8,7 +8,7 @@
   var WIDTH_IN_PERCENT_OF_PARENT = 100;
   var HEIGHT_IN_PERCENT_OF_PARENT = 100;
   var gd = Plotly.d3.select('body')
-    .append('div').attr("id", "e9817c5d-3c02-4ff2-add9-dde6b5ff5173")
+    .append('div').attr("id", "62d67018-6c12-4c5e-a7c7-c4622d1deb83")
     .style({
       width: WIDTH_IN_PERCENT_OF_PARENT + '%',
       'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%',
@@ -16,7 +16,7 @@
       'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
     })
     .node();
-  var plot_json = {"layout":{"legend":{"yanchor":"bottom","xanchor":"right","y":0},"margin":{"l":50,"b":50,"r":50,"t":60},"title":"States","yaxis":{"type":"log"}},"data":[{"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],"mode":"lines+markers","y":[118,149,217,262,402,518,583,959,1281,1663,2179,2727,3499,4632,6421,7783,13677,19100],"type":"scatter","name":"US","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10],"mode":"lines+markers","y":[173,220,328,421,525,732,967,1706,2495,5365,8310],"type":"scatter","name":"New York","marker":{"size":5}},{"x":[0,1,2,3,4],"mode":"lines+markers","y":[178,267,267,742,890],"type":"scatter","name":"New Jersey","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10],"mode":"lines+markers","y":[267,366,442,568,572,643,904,1076,1014,1376,1524],"type":"scatter","name":"Washington","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10],"mode":"lines+markers","y":[144,177,221,282,340,426,557,698,751,952,1177],"type":"scatter","name":"California","marker":{"size":5}},{"x":[0,1,2,3,4,5],"mode":"lines+markers","y":[115,155,216,314,417,563],"type":"scatter","name":"Florida","marker":{"size":5}}]};
+  var plot_json = {"layout":{"legend":{"yanchor":"bottom","xanchor":"right","y":0},"margin":{"l":50,"b":50,"r":50,"t":60},"title":"States","yaxis":{"type":"log"}},"data":[{"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"mode":"lines+markers","y":[118,149,217,262,402,518,583,959,1281,1663,2179,2727,3499,4632,6421,7783,13677,19100,25489],"type":"scatter","name":"US","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10,11],"mode":"lines+markers","y":[173,220,328,421,525,732,967,1706,2495,5365,8310,11710],"type":"scatter","name":"New York","marker":{"size":5}},{"x":[0,1,2,3,4,5],"mode":"lines+markers","y":[178,267,267,742,890,1327],"type":"scatter","name":"New Jersey","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10,11],"mode":"lines+markers","y":[267,366,442,568,572,643,904,1076,1014,1376,1524,1793],"type":"scatter","name":"Washington","marker":{"size":5}},{"x":[0,1,2,3,4,5,6,7,8,9,10,11],"mode":"lines+markers","y":[144,177,221,282,340,426,557,698,751,952,1177,1364],"type":"scatter","name":"California","marker":{"size":5}},{"x":[0,1,2,3,4,5,6],"mode":"lines+markers","y":[115,155,216,314,417,563,659],"type":"scatter","name":"Florida","marker":{"size":5}}]};
   var data = plot_json.data;
   var layout = plot_json.layout;
   Plotly.newPlot(gd, data, layout);
