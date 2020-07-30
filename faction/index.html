@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>faction chooser</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+
+  <body onload="initialize()">
+    <section class="section">
+      <div class="container">
+        <h1 class="title"> faction chooser </h1>
+
+        <div class="tile is-ancestor is-vertical">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Faction</p>
+              <div class="content">
+                <div class="columns">
+                  <div class="column is-one-quarter">
+                    <button
+                      id="faction"
+                      class="button is-info is-light"
+                      onclick="rollFaction()"
+                    ></button>
+                  </div>
+                  <div id="factions" class="column"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">D4</p>
+              <div class="content">
+                <button
+                  id="d4"
+                  class="button is-info is-light"
+                  onclick="roll('d4', 4)"
+                ></button>
+              </div>
+            </article>
+
+            <article class="tile is-child box">
+              <p class="title">D6</p>
+              <div class="content">
+                <button
+                  id="d6"
+                  class="button is-info is-light"
+                  onclick="roll('d6', 6)"
+                ></button>
+              </div>
+            </article>
+
+            <article class="tile is-child box">
+              <p class="title">D10</p>
+              <div class="content">
+                <button
+                  id="d10"
+                  class="button is-info is-light"
+                  onclick="roll('d10', 10)"
+                ></button>
+              </div>
+            </article>
+
+            <article class="tile is-child box">
+              <p class="title">D20</p>
+              <div class="content">
+                <button
+                  id="d20"
+                  class="button is-info is-light"
+                  onclick="roll('d20', 20)"
+                ></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="src/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+body {
+  font-family: sans-serif;
+}
+
+il {
+  display: block;
+}
+
+/* .boxx { */
+/*     display: inline; */
+/*   /\* float: left; *\/ */
+/*   height: 1em; */
+/*   width: 1em; */
+/*   margin-bottom: 15px; */
+/*   /\*border: 1px solid black; *\/ */
+/*   /\* clear: both; *\/ */
+/* } */
+
+.faction {
+    border: 3px solid;
+    min-width: 10em;
+}
+
+.red {
+  border-color: red;
+}
+
+.green {
+  border-color: green;
+}
+
+.blue {
+  border-color: blue;
+}
+
+.yellow {
+  border-color: yellow;
+}
+
+.grey {
+  border-color: lightgray;
+}
+
+.black{
+  border-color: black
+}
+
+button {
+    min-width: 10em;
+}
