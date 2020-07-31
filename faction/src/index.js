@@ -7,18 +7,33 @@ window.roll = function(id, n) {
 
 var factions = [
     {
-        name: "Alchemists",
-        color: "black",
-        side: "a"
-    },
-    {
         name: "Auren",
         color: "green",
         side: "a"
     },
     {
-        name: "Chaos Magicians",
-        color: "red",
+        name: "Witches",
+        color: "green",
+        side: "a"
+    },
+    {
+        name: "Mermaids",
+        color: "blue",
+        side: "a"
+    },
+    {
+        name: "Swarmlings",
+        color: "blue",
+        side: "a"
+    },
+    {
+        name: "Alchemists",
+        color: "black",
+        side: "a"
+    },
+    {
+        name: "Darklings",
+        color: "black",
         side: "a"
     },
     {
@@ -27,8 +42,28 @@ var factions = [
         side: "a"
     },
     {
-        name: "Darklings",
-        color: "black",
+        name: "Halflings",
+        color: "brown",
+        side: "a"
+    },
+    {
+        name: "Fakir",
+        color: "yellow",
+        side: "a"
+    },
+    {
+        name: "Nomads",
+        color: "yellow",
+        side: "a"
+    },
+    {
+        name: "Chaos Magicians",
+        color: "red",
+        side: "a"
+    },
+    {
+        name: "Giants",
+        color: "red",
         side: "a"
     },
     {
@@ -42,42 +77,37 @@ var factions = [
         side: "a"
     },
     {
-        name: "Fakir",
-        color: "yellow",
-        side: "a"
+        name: "Ice Maidens",
+        color: "ice",
+        side: "b"
     },
     {
-        name: "Giants",
-        color: "red",
-        side: "a"
+        name: "Yetis",
+        color: "ice",
+        side: "b"
     },
     {
-        name: "Halflings",
-        color: "brown",
-        side: "a"
+        name: "Acolytes",
+        color: "fire",
+        side: "b"
     },
     {
-        name: "Mermaids",
-        color: "blue",
-        side: "a"
+        name: "Dragonlords",
+        color: "fire",
+        side: "b"
     },
     {
-        name: "Nomads",
-        color: "yellow",
-        side: "a"
+        name: "Riverwalkers",
+        color: "null",
+        side: "b"
     },
     {
-        name: "Swarmlings",
-        color: "blue",
-        side: "a"
+        name: "Shapeshifters",
+        color: "null",
+        side: "b"
     },
-    {
-        name: "Witches",
-        color: "green",
-        side: "a"
-    }
 ];
-factions.sort((a, b) => (a.color > b.color) ? 1 : -1)
+// factions.sort((a, b) => (a.color > b.color) ? 1 : -1)
 
 
 var done = false;

@@ -4,23 +4,14 @@ body {
 
 il {
     display: block;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
 }
-
-/* .boxx { */
-/*     display: inline; */
-/*   /\* float: left; *\/ */
-/*   height: 1em; */
-/*   width: 1em; */
-/*   margin-bottom: 15px; */
-/*   /\*border: 1px solid black; *\/ */
-/*   /\* clear: both; *\/ */
-/* } */
 
 .faction {
     border: 1px solid;
     border-color: black;
     min-width: 10em;
+    padding: 0.2em;
 }
 
 .red {
@@ -41,6 +32,10 @@ il {
 
 .grey {
     background-color: rgb(192, 192, 192);
+}
+
+.brown {
+    background-color: rgb(176, 128, 64);
 }
 
 .black{
