@@ -1,480 +1,105 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2P Textarea Sharing</title>
-    <script src="webtorrent.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-```
-    .container {
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
-    }
-
-    h1 {
-        text-align: center;
-        color: #4a5568;
-        margin-bottom: 30px;
-        font-size: 2.5em;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .user-section {
-        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 30px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .user-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .user-id {
-        font-family: 'Courier New', monospace;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 10px 15px;
-        border-radius: 25px;
-        font-size: 0.9em;
-        word-break: break-all;
-        flex: 1;
-        min-width: 200px;
-    }
-
-    .status {
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.9em;
-        background: rgba(255, 255, 255, 0.9);
-    }
-
-    .status.connected { color: #38a169; }
-    .status.connecting { color: #d69e2e; }
-    .status.disconnected { color: #e53e3e; }
-
-    textarea {
-        width: 100%;
-        min-height: 120px;
-        border: 3px solid rgba(255, 255, 255, 0.6);
-        border-radius: 15px;
-        padding: 15px;
-        font-size: 16px;
-        font-family: inherit;
-        resize: vertical;
-        background: rgba(255, 255, 255, 0.9);
-        transition: all 0.3s ease;
-    }
-
-    textarea:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        transform: translateY(-2px);
-    }
-
-    .subscribe-section {
-        margin-top: 40px;
-    }
-
-    .subscribe-form {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
-    }
-
-    .subscribe-input {
-        flex: 1;
-        padding: 12px 18px;
-        border: 2px solid #e2e8f0;
-        border-radius: 25px;
-        font-size: 16px;
-        min-width: 200px;
-        transition: all 0.3s ease;
-    }
-
-    .subscribe-input:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
-    }
-
-    .subscribe-btn {
-        padding: 12px 25px;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-    }
-
-    .subscribe-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-    }
-
-    .subscriptions {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-
-    .subscription {
-        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .subscription:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .subscription::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-    }
-
-    .subscription-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .subscription-id {
-        font-family: 'Courier New', monospace;
-        font-size: 0.85em;
-        color: #4a5568;
-        word-break: break-all;
-        flex: 1;
-        min-width: 150px;
-    }
-
-    .unsubscribe-btn {
-        background: #fed7d7;
-        color: #c53030;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 15px;
-        cursor: pointer;
-        font-size: 0.8em;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
-
-    .unsubscribe-btn:hover {
-        background: #feb2b2;
-        transform: scale(1.05);
-    }
-
-    .subscription-content {
-        background: rgba(255, 255, 255, 0.8);
-        padding: 15px;
-        border-radius: 10px;
-        min-height: 60px;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    .empty-state {
-        text-align: center;
-        color: #718096;
-        font-style: italic;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 15px;
-        border: 2px dashed #cbd5e0;
-    }
-
-    @media (max-width: 768px) {
-        .container {
-            padding: 20px;
-            margin: 10px;
-        }
-
-        .user-info {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .subscribe-form {
-            flex-direction: column;
-        }
-
-        .subscriptions {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .pulse {
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.7; }
-        100% { opacity: 1; }
-    }
-</style>
-```
-
+  <meta charset="UTF-8">
+  <title>Peer-to-Peer Subscription Chat</title>
+  <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 2em; }
+    textarea { width: 100%; height: 100px; }
+    .subscription { border: 1px solid #ccc; padding: 1em; margin: 1em 0; background: #f9f9f9; }
+    .subs-title { font-weight: bold; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🌐 P2P Textarea Sharing</h1>
 
-```
-    <div class="user-section">
-        <div class="user-info">
-            <div class="user-id">Your ID: <span id="userId">Generating...</span></div>
-            <div class="status" id="status">Connecting...</div>
-        </div>
-        <textarea id="myTextarea" placeholder="Type your message here... It will be shared with your subscribers in real-time!"></textarea>
-    </div>
+<h2>My Textarea</h2>
+<textarea id="myText"></textarea>
+<p><button id="shareBtn">Share My Updates</button></p>
+<p>My Public Key: <code id="myKey"></code></p>
 
-    <div class="subscribe-section">
-        <h2>📡 Subscribe to Others</h2>
-        <div class="subscribe-form">
-            <input
-                type="text"
-                id="subscribeInput"
-                class="subscribe-input"
-                placeholder="Enter user ID to subscribe to..."
-            >
-            <button onclick="subscribe()" class="subscribe-btn">Subscribe</button>
-        </div>
+<h3>Subscribe to another user:</h3>
+<input type="text" id="subscribeKey" placeholder="Paste magnet URI or key here" style="width: 100%">
+<button id="subscribeBtn">Subscribe</button>
 
-        <div class="subscriptions" id="subscriptions">
-            <div class="empty-state">
-                No subscriptions yet. Add a user ID above to start following someone!
-            </div>
-        </div>
-    </div>
-</div>
+<h2>Subscriptions</h2>
+<div id="subscriptions"></div>
 
 <script>
-    let client;
-    let myUserId;
-    let myTorrent;
-    let subscriptions = {};
-    let myTextContent = '';
+const client = new WebTorrent();
+let myKey = generateKey();
+let myText = document.getElementById('myText');
+let myKeyDisplay = document.getElementById('myKey');
+myKeyDisplay.textContent = myKey;
 
-    // Generate a unique user ID
-    function generateUserId() {
-        return Array.from(crypto.getRandomValues(new Uint8Array(16)), 
-            byte => byte.toString(16).padStart(2, '0')).join('');
-    }
+const updateInterval = 10000; // ms - how often to refresh torrents
 
-    // Initialize WebTorrent client
-    async function init() {
-        try {
-            client = new WebTorrent();
-            myUserId = generateUserId();
-            
-            document.getElementById('userId').textContent = myUserId;
-            document.getElementById('status').textContent = 'Connecting...';
-            document.getElementById('status').className = 'status connecting pulse';
+function generateKey() {
+  // For demo: generate a simple random ID
+  return 'user-' + Math.random().toString(36).substring(2, 10);
+}
 
-            // Create initial content
-            await createMyTorrent();
-            
-            // Set up textarea listener
-            const textarea = document.getElementById('myTextarea');
-            textarea.addEventListener('input', debounce(updateMyContent, 500));
+function textToBlob(text) {
+  return new Blob([text], { type: 'text/plain' });
+}
 
-            // Simulate connection after a short delay
-            setTimeout(() => {
-                document.getElementById('status').textContent = 'Connected';
-                document.getElementById('status').className = 'status connected';
-            }, 2000);
+function shareMyText() {
+  const content = myText.value;
+  const blob = textToBlob(content);
+  client.seed(blob, { name: myKey + ".txt" }, torrent => {
+    console.log('Seeding:', torrent.magnetURI);
+    localStorage.setItem("myMagnetURI", torrent.magnetURI);
+  });
+}
 
-        } catch (error) {
-            console.error('Failed to initialize:', error);
-            document.getElementById('status').textContent = 'Connection Failed';
-            document.getElementById('status').className = 'status disconnected';
-        }
-    }
+document.getElementById('shareBtn').onclick = shareMyText;
 
-    // Create torrent for my content
-    async function createMyTorrent() {
-        const content = document.getElementById('myTextarea').value || '';
-        const blob = new Blob([JSON.stringify({
-            userId: myUserId,
-            content: content,
-            timestamp: Date.now()
-        })], { type: 'application/json' });
-        
-        const file = new File([blob], `user-${myUserId}.json`);
-        
-        if (myTorrent) {
-            myTorrent.destroy();
-        }
+// --- Subscriptions ---
+const subsContainer = document.getElementById('subscriptions');
 
-        myTorrent = client.seed([file], {
-            name: `User ${myUserId} Content`,
-            comment: `Shared content from user ${myUserId}`
+function addSubscription(magnetURI) {
+  client.add(magnetURI, torrent => {
+    torrent.files[0].getBlob((err, blob) => {
+      if (err) return console.error('Error getting blob:', err);
+      const reader = new FileReader();
+      reader.onload = function () {
+        const text = reader.result;
+        renderSubscription(torrent.infoHash, text);
+      };
+      reader.readAsText(blob);
+
+      // Periodic refresh
+      setInterval(() => {
+        torrent.files[0].getBlob((err, blob) => {
+          if (err) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            renderSubscription(torrent.infoHash, reader.result);
+          };
+          reader.readAsText(blob);
         });
-
-        myTorrent.on('ready', () => {
-            console.log('My torrent ready:', myTorrent.infoHash);
-        });
-    }
-
-    // Update my content and recreate torrent
-    async function updateMyContent() {
-        const newContent = document.getElementById('myTextarea').value;
-        if (newContent !== myTextContent) {
-            myTextContent = newContent;
-            await createMyTorrent();
-        }
-    }
-
-    // Subscribe to another user
-    function subscribe() {
-        const userId = document.getElementById('subscribeInput').value.trim();
-        if (!userId) return;
-        
-        if (userId === myUserId) {
-            alert("You can't subscribe to yourself!");
-            return;
-        }
-        
-        if (subscriptions[userId]) {
-            alert("Already subscribed to this user!");
-            return;
-        }
-
-        // Simulate torrent hash for the user (in real implementation, this would be derived from userId)
-        const mockInfoHash = userId.slice(0, 40).padEnd(40, '0');
-        
-        subscriptions[userId] = {
-            userId: userId,
-            content: 'Loading...',
-            timestamp: Date.now()
-        };
-
-        // Simulate loading content
-        setTimeout(() => {
-            subscriptions[userId].content = `Sample content from user ${userId.slice(0, 8)}...\n\nThis would be their actual textarea content in a real P2P implementation.`;
-            updateSubscriptionsDisplay();
-            
-            // Simulate periodic updates
-            setInterval(() => {
-                if (subscriptions[userId]) {
-                    subscriptions[userId].content += `\n\n[Update ${new Date().toLocaleTimeString()}] New content added...`;
-                    subscriptions[userId].timestamp = Date.now();
-                    updateSubscriptionsDisplay();
-                }
-            }, 10000 + Math.random() * 20000);
-        }, 1000 + Math.random() * 2000);
-
-        document.getElementById('subscribeInput').value = '';
-        updateSubscriptionsDisplay();
-    }
-
-    // Unsubscribe from a user
-    function unsubscribe(userId) {
-        delete subscriptions[userId];
-        updateSubscriptionsDisplay();
-    }
-
-    // Update subscriptions display
-    function updateSubscriptionsDisplay() {
-        const container = document.getElementById('subscriptions');
-        
-        if (Object.keys(subscriptions).length === 0) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    No subscriptions yet. Add a user ID above to start following someone!
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = Object.keys(subscriptions).map(userId => {
-            const sub = subscriptions[userId];
-            return `
-                <div class="subscription">
-                    <div class="subscription-header">
-                        <div class="subscription-id">${userId}</div>
-                        <button class="unsubscribe-btn" onclick="unsubscribe('${userId}')">
-                            Unsubscribe
-                        </button>
-                    </div>
-                    <div class="subscription-content">${sub.content}</div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    // Debounce function to limit API calls
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    // Handle Enter key in subscribe input
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('subscribeInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                subscribe();
-            }
-        });
+      }, updateInterval);
     });
+  });
+}
 
-    // Initialize the application
-    init();
+function renderSubscription(id, text) {
+  let div = document.getElementById('sub-' + id);
+  if (!div) {
+    div = document.createElement('div');
+    div.className = 'subscription';
+    div.id = 'sub-' + id;
+    div.innerHTML = `<div class="subs-title">Subscription: ${id}</div><pre class="sub-content"></pre>`;
+    subsContainer.appendChild(div);
+  }
+  div.querySelector('.sub-content').textContent = text;
+}
+
+document.getElementById('subscribeBtn').onclick = () => {
+  const uri = document.getElementById('subscribeKey').value.trim();
+  if (uri) addSubscription(uri);
+};
 </script>
-```
 
 </body>
 </html>
